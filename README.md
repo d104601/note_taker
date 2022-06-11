@@ -14,8 +14,9 @@ Type following in command line to run the application:
 ```
 npm start
 ```
-You can access to the application with following link via web browser.
+You can access to the application with following link via web browser.: 
 http://localhost:3000
 
 ## Deployed Application
+The application is deployed using Heroku.
 https://note-taker-by-taeyong-lee.herokuapp.com/
