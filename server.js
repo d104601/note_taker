@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const db = require("./db/db.json");
+const uuid = require("uuid");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -22,22 +23,22 @@ app.get("/api/notes", (req, res) => {
 
 app.post("/api/notes", (req, res) => {
     let {title, text} = req.body;
-    
+    let id = uuid.v4();
     let note = {
         title,
-        text
+        text,
+        id
     }
 
     db.push(note);
 
-    fs.writeFile("db/db.json", db, (err) => {
-        if(err)
-        {
-            throw err;
-        }
-        console.log("Note saved.")
+    fs.writeFile("db/db.json", JSON.stringify(db, "\t"), (err) => {
+        if (err)
+        { throw err; }
+        res.json(db);
     });
-})
+});
+
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "public/index.html"));
