@@ -18,7 +18,7 @@ app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public/index.html"
 
 app.route("/api/notes")
     .get(function(req, res) {
-        res.json("./db/db.json");
+        res.json(JSON.parse("./db/db.json"));
     })
     // note posting
     .post(function(req, res) {});
