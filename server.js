@@ -39,6 +39,15 @@ app.post("/api/notes", (req, res) => {
     });
 });
 
+app.delete("/api/notes/:id", (req, res) =>{
+    db.splice(req.params.id, 1);
+
+    fs.writeFile("db/db.json", JSON.stringify(db, "\t"), (err) => {
+        if (err)
+        { throw err; }
+        res.json(db);
+    });
+});
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "public/index.html"));
