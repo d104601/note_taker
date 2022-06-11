@@ -1,7 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const database = require("./db/db.json");
+const db = require("./db/db.json");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -17,8 +17,27 @@ app.get("/notes", (req, res) => {
 
 
 app.get("/api/notes", (req, res) => {
-    return res.json(database);
+    return res.json(db);
 });
+
+app.post("/api/notes", (req, res) => {
+    let {title, text} = req.body;
+    
+    let note = {
+        title,
+        text
+    }
+
+    db.push(note);
+
+    fs.writeFile("db/db.json", db, (err) => {
+        if(err)
+        {
+            throw err;
+        }
+        console.log("Note saved.")
+    });
+})
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "public/index.html"));
