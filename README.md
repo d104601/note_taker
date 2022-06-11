@@ -20,3 +20,6 @@ http://localhost:3000
 ## Deployed Application
 The application is deployed using Heroku.
 https://note-taker-by-taeyong-lee.herokuapp.com/
+
+## Application Screenshot
+![sample](https://github.com/d104601/note_taker/blob/main/screenshot.jpg)
