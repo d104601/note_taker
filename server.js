@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const db = require("./db/db.json");
 
 const app = express();
 const PORT = 3001;
@@ -18,9 +17,12 @@ app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public/index.html"
 
 
 app.route("/api/notes")
-    .get((req, res) => res.json(JSON.parse(db)));
+    .get(function(req, res) {
+        res.json("./db/db.json");
+    })
+    // note posting
+    .post(function(req, res) {});
 
-// note posting
 
 
 app.listen(PORT, () => 
